@@ -12,12 +12,6 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrains Mono ExtraLight:size=11" }; //{ "Noto Sans Mono:size=11"} 
 static const char dmenufont[]       = "JetBrains Mono ExtraLight:size=11"; // "monospace:size=10";
-static const char col_gray1[]       = "#0e0e0e";
-static const char col_gray2[]       = "#3c3c3c";
-static const char col_gray3[]       = "#8e8e8e";
-static const char col_gray4[]       = "#ebebeb";
-static const char col_cyan[]        = "#6dc7ef";
-
 // tendet theme colors
 static const char col_red1[]        = "#f43753";
 static const char col_red2[]        = "#c5152f";
@@ -28,7 +22,6 @@ static const char col_blue3[]       = "#44778d";
 static const char col_blue4[]       = "#335261";
 static const char col_blue5[]       = "#293b44";
 static const char col_green1[]      = "#c9d05c";
-static const char col_green2[]      = "#9ffaa0";
 static const char col_green3[]      = "#6a6b3f";
 static const char col_green4[]      = "#464632";
 static const char col_yellow1[]     = "#d3b987";
@@ -51,8 +44,8 @@ static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_green1, col_green4, col_green4 },
-	[SchemeSel]  = { col_green4, col_green1, col_green1 },
+	[SchemeNorm] = { col_blue2, col_blue5, col_blue5 },
+	[SchemeSel]  = { col_yellow2, col_blue4, col_blue4 },
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg        border     */
@@ -101,7 +94,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bg, "-nf", col_yellow1, "-sb", col_yellow3, "-sf", col_yellow1, NULL };
 static const char *filecmd[]  = { "thunar", NULL };
 static const char *calendar[]  = { "gsimplecal", NULL };
 static const char *bashtop[]  = { "xfce4-taskmanager", NULL };
