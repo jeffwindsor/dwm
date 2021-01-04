@@ -10,19 +10,49 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Noto Sans Mono:size=11" };
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#6790EB";
+static const char *fonts[]          = { "JetBrains Mono ExtraLight:size=11" }; //{ "Noto Sans Mono:size=11"} 
+static const char dmenufont[]       = "JetBrains Mono ExtraLight:size=11"; // "monospace:size=10";
+static const char col_gray1[]       = "#0e0e0e";
+static const char col_gray2[]       = "#3c3c3c";
+static const char col_gray3[]       = "#8e8e8e";
+static const char col_gray4[]       = "#ebebeb";
+static const char col_cyan[]        = "#6dc7ef";
+
+// tendet theme colors
+static const char col_red1[]        = "#f43753";
+static const char col_red2[]        = "#c5152f";
+static const char col_red3[]        = "#79313c";
+static const char col_blue1[]       = "#b3deef";
+static const char col_blue2[]       = "#73cef4";
+static const char col_blue3[]       = "#44778d";
+static const char col_blue4[]       = "#335261";
+static const char col_blue5[]       = "#293b44";
+static const char col_green1[]      = "#c9d05c";
+static const char col_green2[]      = "#9ffaa0";
+static const char col_green3[]      = "#6a6b3f";
+static const char col_green4[]      = "#464632";
+static const char col_yellow1[]     = "#d3b987";
+static const char col_yellow2[]     = "#ffc24b";
+static const char col_yellow3[]     = "#715b2f";
+static const char col_highlight[]   = "#ffffff";
+static const char col_text[]        = "#eeeeee";
+static const char col_pearl[]       = "#dadada";
+static const char col_gandolf[]     = "#bbbbbb";
+static const char col_grey1[]       = "#999999";
+static const char col_grey2[]       = "#666666";
+static const char col_grey3[]       = "#444444";
+static const char col_shadow[]      = "#323232";
+static const char col_bg[]          = "#282828";
+static const char col_dark[]        = "#202020";
+static const char col_darker[]      = "#1d1d1d";
+static const char col_darkest[]     = "#000000";
+
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeNorm] = { col_green1, col_green4, col_green4 },
+	[SchemeSel]  = { col_green4, col_green1, col_green1 },
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg        border     */
@@ -35,7 +65,7 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
+	 *	WM_CLASS(STRING) = instance, clasdmenucmds
 	 *	WM_NAME(STRING) = title
 	 *  use tags mask to point an application to a specific workspace
 	 */
