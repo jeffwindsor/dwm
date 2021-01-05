@@ -5,13 +5,13 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const unsigned int systrayspacing = 0;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrains Mono ExtraLight:size=11" }; //{ "Noto Sans Mono:size=11"} 
-static const char dmenufont[]       = "JetBrains Mono ExtraLight:size=11"; // "monospace:size=10";
+static const char *fonts[]          = { "JetBrains Mono ExtraLight:size=12" }; //{ "Noto Sans Mono:size=11"} 
+static const char dmenufont[]       = "JetBrains Mono ExtraLight:size=12"; // "monospace:size=10";
 // tendet theme colors
 static const char col_red1[]        = "#f43753";
 static const char col_red2[]        = "#c5152f";
@@ -40,7 +40,7 @@ static const char col_dark[]        = "#202020";
 static const char col_darker[]      = "#1d1d1d";
 static const char col_darkest[]     = "#000000";
 
-static const unsigned int baralpha = 0xd0;
+static const unsigned int baralpha = OPAQUE; // 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
