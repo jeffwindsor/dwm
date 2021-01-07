@@ -27,6 +27,6 @@ picom -b --config ~/.config/picom/picom.conf &
 run "numlockx on"
 run slstatus &
 #run dwmblocks &
-sxhkd -c ~/.config/sxhkd/sxhkdrc &
+#sxhkd -c ~/.config/sxhkd/sxhkdrc &
 #you can set wallpapers in themes as well
 #feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &

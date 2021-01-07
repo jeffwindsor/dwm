@@ -10,12 +10,9 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrains Mono ExtraLight:size=12" }; //{ "Noto Sans Mono:size=11"} 
-static const char dmenufont[]       = "JetBrains Mono ExtraLight:size=12"; // "monospace:size=10";
-// tendet theme colors
-static const char col_red1[]        = "#f43753";
-static const char col_red2[]        = "#c5152f";
-static const char col_red3[]        = "#79313c";
+static const char *fonts[]          = { "JetBrains Mono Light:size=12" }; //{ "Noto Sans Mono:size=11"} 
+static const char dmenufont[]       =   "JetBrains Mono Light:size=12"; // "monospace:size=10";
+// tender theme colors
 static const char col_blue1[]       = "#b3deef";
 static const char col_blue2[]       = "#73cef4";
 static const char col_blue3[]       = "#44778d";
@@ -27,6 +24,9 @@ static const char col_green4[]      = "#464632";
 static const char col_yellow1[]     = "#d3b987";
 static const char col_yellow2[]     = "#ffc24b";
 static const char col_yellow3[]     = "#715b2f";
+static const char col_red1[]        = "#f43753";
+static const char col_red2[]        = "#c5152f";
+static const char col_red3[]        = "#79313c";
 static const char col_highlight[]   = "#ffffff";
 static const char col_text[]        = "#eeeeee";
 static const char col_pearl[]       = "#dadada";
@@ -97,8 +97,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bg, "-nf", col_yellow1, "-sb", col_yellow3, "-sf", col_yellow1, NULL };
 static const char *filecmd[]  = { "thunar", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
+static const char *htmlcmd[]  = { "brave", NULL };
+static const char *tweakcmd[] = { "arcolinux-tweak-tool", NULL };
+static const char *volcmd[]   = { "pavuctrl", NULL };
+static const char *emacscmd[] = { "emacs", NULL };
 static const char *calendar[]  = { "gsimplecal", NULL };
-static const char *bashtop[]  = { "xfce4-taskmanager", NULL };
+static const char *taskcmd[]  = { "xfce4-taskmanager", NULL };
 
 #include "selfrestart.c"
 #include "shiftview.c"
@@ -106,23 +111,26 @@ static const char *bashtop[]  = { "xfce4-taskmanager", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 
+    /* Programs */
+	{ MODKEY,            			XK_space,  spawn,          {.v = dmenucmd} },
+	{ MODKEY,            			XK_Return,  spawn,          {.v = termcmd} },
+	{ MODKEY|ShiftMask,     	    XK_Return,  spawn,          {.v = filecmd} },
+	{ MODKEY|ControlMask,      	    XK_Return,  spawn,          {.v = htmlcmd} },
+	{ MODKEY,            			XK_period, spawn,          {.v = tweakcmd} },
+	{ MODKEY,            			XK_v,      spawn,          {.v = volcmd} },
+	{ MODKEY,            			XK_Escape, spawn,          {.v = taskcmd} },
+
 	/* Layout */
-    //CYCLE LAYOUT { MODKEY|ShiftMask,XK_space,,{} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	//{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} },
-	//{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
 	
     /* Window */
 	{ MODKEY,            			XK_q,      killclient,     {0} },
-    { MODKEY,	                    XK_f,      zoom,           {0} },
-    
-    /* Master */
     { MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_comma,  incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_period, incnmaster,     {.i = -1 } },
-	//SWAP TO MAIN  { MODKEY|ShiftMask,XK_m,,{} },
-
 	{ MODKEY,                       XK_Up,     focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Down,   focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
@@ -147,7 +155,7 @@ static Button buttons[] = {
        { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
        { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
        { ClkWinTitle,          0,              Button2,        zoom,           {0} },
-       { ClkStatusText,        0,              Button1,        spawn,          {.v = bashtop } },
+       { ClkStatusText,        0,              Button1,        spawn,          {.v = taskcmd } },
        { ClkStatusText,        0,              Button2,        spawn,          {.v = filecmd } },
        { ClkStatusText,        0,              Button3,        spawn,          {.v = calendar } },
        { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
@@ -158,3 +166,4 @@ static Button buttons[] = {
        { ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
        { ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
