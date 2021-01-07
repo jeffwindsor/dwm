@@ -102,8 +102,9 @@ static const char *htmlcmd[]  = { "brave", NULL };
 static const char *tweakcmd[] = { "arcolinux-tweak-tool", NULL };
 static const char *volcmd[]   = { "pavuctrl", NULL };
 static const char *emacscmd[] = { "emacs", NULL };
-static const char *calendar[]  = { "gsimplecal", NULL };
+static const char *calendar[] = { "gsimplecal", NULL };
 static const char *taskcmd[]  = { "xfce4-taskmanager", NULL };
+static const char *logoutcmd[]= { "arcolinux-logout", NULL };
 
 #include "selfrestart.c"
 #include "shiftview.c"
@@ -113,12 +114,13 @@ static Key keys[] = {
 
     /* Programs */
 	{ MODKEY,            			XK_space,  spawn,          {.v = dmenucmd} },
-	{ MODKEY,            			XK_Return,  spawn,          {.v = termcmd} },
-	{ MODKEY|ShiftMask,     	    XK_Return,  spawn,          {.v = filecmd} },
-	{ MODKEY|ControlMask,      	    XK_Return,  spawn,          {.v = htmlcmd} },
+	{ MODKEY,            			XK_Return, spawn,          {.v = termcmd} },
+	{ MODKEY|ShiftMask,     	    XK_Return, spawn,          {.v = filecmd} },
+	{ MODKEY|ControlMask,      	    XK_Return, spawn,          {.v = htmlcmd} },
 	{ MODKEY,            			XK_period, spawn,          {.v = tweakcmd} },
 	{ MODKEY,            			XK_v,      spawn,          {.v = volcmd} },
 	{ MODKEY,            			XK_Escape, spawn,          {.v = taskcmd} },
+	{ MODKEY,            			XK_x,      spawn,          {.v = logoutcmd} },
 
 	/* Layout */
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
