@@ -106,8 +106,8 @@ static const char *calendar[] = { "gsimplecal", NULL };
 static const char *taskcmd[]  = { "xfce4-taskmanager", NULL };
 static const char *logoutcmd[]= { "arcolinux-logout", NULL };
 
-#include "patches/selfrestart.c"
-#include "patches/shiftview.c"
+#include "selfrestart.c"
+#include "shiftview.c"
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -121,7 +121,6 @@ static Key keys[] = {
 	{ MODKEY,            			XK_v,      spawn,          {.v = volcmd} },
 	{ MODKEY,            			XK_Escape, spawn,          {.v = taskcmd} },
 	{ MODKEY,            			XK_x,      spawn,          {.v = logoutcmd} },
-	{ MODKEY,            			XK_e,      spawn,          {.v = emacscmd} },
 
 	/* Layout */
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
