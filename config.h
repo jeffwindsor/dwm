@@ -1,3 +1,5 @@
+#define TERMINAL "alacritty"
+
 #include "patches/tender_colors.h"
 #include "patches/selfrestart.c"
 
@@ -37,9 +39,9 @@ static const int nmaster        = 1;    /* number of clients in master area */
 static const int resizehints    = 1;    /* 1 means respect size hints in tiled resizals */
 static const Layout layouts[]   = {
 	/* symbol     arrange function */
-	{ "=",      tile },    /* first entry is default */
-	{ "!",      NULL },    /* no layout function means floating behavior */
-	{ "O",      monocle },
+	{ "[]=",      tile },    /* first entry is default */
+	{ "<!>",      NULL },    /* no layout function means floating behavior */
+	{ "[M]",      monocle },
 };
 
 
@@ -61,39 +63,37 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon,
     "-nb", col_bg, "-nf", col_yellow1, 
     "-sb", col_yellow3, "-sf", col_yellow1,
     NULL };
-static const char *termcmd[] = {"alacritty", NULL};
-static const char *filecmd[] = {"thunar", NULL};
-static const char *htmlcmd[] = {"firefox", NULL};
-static const char *tweakcmd[] = {"arcolinux-tweak-tool", NULL};
-static const char *volcmd[] = {"pavctrl", NULL};
-static const char *topcmd[] = {"xfce4-taskmanager", NULL};
-static const char *exitcmd[] = {"arcolinux-logout", NULL};
-static const char *emacscmd[] = {"emacs", NULL};
 
 static Key keys[] = {
 	/* modifier          key        function        argument */
 	{ MODKEY,            XK_space,  spawn,          {.v = dmenucmd} },
-	{ MODKEY,            XK_Return, spawn,          {.v = termcmd} },
-	{ MODKEY|ShiftMask,  XK_Return, spawn,          {.v = filecmd} },
-	{ MODKEY|ControlMask,XK_Return, spawn,          {.v = htmlcmd} },
-	{ MODKEY,            XK_period, spawn,          {.v = tweakcmd} },
-	{ MODKEY,            XK_v,      spawn,          {.v = volcmd} },
-	{ MODKEY,            XK_Escape, spawn,          {.v = topcmd} },
-	{ MODKEY,            XK_x,      spawn,          {.v = exitcmd} },
-	{ MODKEY,            XK_e,      spawn,          {.v = emacscmd} },
+	{ MODKEY,            XK_Return, spawn,          SHCMD(TERMINAL)},
+	{ MODKEY|ShiftMask,  XK_Return, spawn,          SHCMD("thunar")},
+	{ MODKEY|ControlMask,XK_Return, spawn,          SHCMD("firefox")},
+	{ MODKEY,            XK_period, spawn,          SHCMD("arcolinux-tweak-tool")},
+	{ MODKEY,            XK_comma,  spawn,          SHCMD(TERMINAL " -e nvim ~/.config/dwm/config.h") },
+	{ MODKEY,            XK_v,      spawn,          SHCMD("pavctrl")},
+	{ MODKEY,            XK_Escape, spawn,          SHCMD("xfce4-taskmanager")},
+	{ MODKEY,            XK_x,      spawn,          SHCMD("arcolinux-logout")},
+	{ MODKEY,            XK_e,      spawn,          SHCMD("emacs")},
+	{ ControlMask,       XK_Left,   spawn,          SHCMD("variety -p")},
+	{ ControlMask,       XK_Right,  spawn,          SHCMD("variety -n")},
 	{ MODKEY,            XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,            XK_f,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,            XK_m,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,            XK_q,      killclient,     {0} },
     { MODKEY,            XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,            XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,            XK_comma,  incnmaster,     {.i = +1 } },
-	{ MODKEY,            XK_period, incnmaster,     {.i = -1 } },
+	{ MODKEY,            XK_equal,  incnmaster,     {.i = +1 } },
+	{ MODKEY,            XK_minus,  incnmaster,     {.i = -1 } },
 	{ MODKEY,            XK_Up,     focusstack,     {.i = +1 } },
 	{ MODKEY,            XK_Down,   focusstack,     {.i = -1 } },
-	{ MODKEY,            XK_minus,  setgaps,        {.i = -1 } },
-	{ MODKEY,            XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,  XK_r,      self_restart,   {0} },
+	//{ 0, XF86XK_MonBrightnessUp,    spawn,          SHCMD("xbacklight -inc 15") },
+	//{ 0, XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 15") },
+	//{ 0, XF86XK_AudioRaiseVolume,   spawn,          SHCMD("amixer set Master 10%+") },
+	//{ 0, XF86XK_AudioLowerVolume,   spawn,          SHCMD("amixer set Master 10%-") },
+	//{ 0, XF86XK_AudioMute,          spawn,          SHCMD("amixer -D pulse set Master 1+ toggle") },
 	TAGKEYS(             XK_1,                      0)
 	TAGKEYS(             XK_2,                      1)
 	TAGKEYS(             XK_3,                      2)
