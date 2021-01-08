@@ -8,13 +8,15 @@ static const int showbar    = 1;        /* 0 means no bar */
 static const int topbar     = 1;        /* 0 means bottom bar */
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_blue2, col_blue5, col_blue4 },
-	[SchemeSel]  = { col_yellow2, col_blue4, col_blue4 },
+	[SchemeNorm] = { col_grey2, col_darker, col_darker },
+	[SchemeSel]  = { col_pearl, col_dark, col_dark },
+	//[SchemeNorm] = { col_blue2, col_blue5, col_blue4 },
+	//[SchemeSel]  = { col_yellow2, col_blue4, col_blue4 },
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg    border     */
-	[SchemeNorm] = { OPAQUE, 0x77, OPAQUE },
-	[SchemeSel]  = { OPAQUE, 0x77, OPAQUE },
+	[SchemeNorm] = { OPAQUE, 0x44, 0x44 },
+	[SchemeSel]  = { OPAQUE, 0x44, 0x44 },
 };
 
 // systray
@@ -22,9 +24,6 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayspacing = 0;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray             = 1;     /* 0 means no systray */
-
-// dmenu
-static const char dmenufont[]       =   "JetBrains Mono Light:size=12"; // "monospace:size=10";
 
 // windows
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -38,9 +37,9 @@ static const int nmaster        = 1;    /* number of clients in master area */
 static const int resizehints    = 1;    /* 1 means respect size hints in tiled resizals */
 static const Layout layouts[]   = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "=",      tile },    /* first entry is default */
+	{ "!",      NULL },    /* no layout function means floating behavior */
+	{ "O",      monocle },
 };
 
 
@@ -57,7 +56,11 @@ static const Layout layouts[]   = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bg, "-nf", col_yellow1, "-sb", col_yellow3, "-sf", col_yellow1, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, 
+    "-fn", "JetBrains Mono Light:size=12", 
+    "-nb", col_bg, "-nf", col_yellow1, 
+    "-sb", col_yellow3, "-sf", col_yellow1,
+    NULL };
 static const char *termcmd[] = {"alacritty", NULL};
 static const char *filecmd[] = {"thunar", NULL};
 static const char *htmlcmd[] = {"firefox", NULL};
