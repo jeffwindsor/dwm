@@ -1,11 +1,11 @@
 #define TERMINAL "alacritty"
 
-#include "patches/tender_colors.h"
-#include "patches/selfrestart.c"
+#include "colors_tender.h"
+#include "selfrestart.c"
 
 // bar
 static const char *tags[]   = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-#include "patches/shiftview.c"
+#include "shiftview.c"
 static const int showbar    = 1;        /* 0 means no bar */
 static const int topbar     = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrains Mono Light:size=12" }; //{ "Noto Sans Mono:size=11"} 
@@ -18,8 +18,8 @@ static const char *colors[][3]      = {
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg    border     */
-	[SchemeNorm] = { OPAQUE, 0xcc, 0xcc },
-	[SchemeSel]  = { OPAQUE, 0xcc, 0xcc },
+	[SchemeNorm] = { OPAQUE, 0xdd, 0xdd },
+	[SchemeSel]  = { OPAQUE, 0xdd, 0xdd },
 };
 
 // dmenu
