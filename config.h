@@ -10,8 +10,8 @@ static const int showbar    = 1;        /* 0 means no bar */
 static const int topbar     = 1;        /* 0 means bottom bar */
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_grey2, col_darker, col_darker },
-	[SchemeSel]  = { col_pearl, col_dark, col_dark },
+	[SchemeNorm] = { col_gandolf, col_darker, col_darker },
+	[SchemeSel]  = { col_text,    col_bg,   col_bg   },
 	//[SchemeNorm] = { col_blue2, col_blue5, col_blue4 },
 	//[SchemeSel]  = { col_yellow2, col_blue4, col_blue4 },
 };
@@ -71,7 +71,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,  XK_Return, spawn,          SHCMD("thunar")},
 	{ MODKEY|ControlMask,XK_Return, spawn,          SHCMD("firefox")},
 	{ MODKEY,            XK_period, spawn,          SHCMD("arcolinux-tweak-tool")},
-	{ MODKEY,            XK_comma,  spawn,          SHCMD(TERMINAL " -e nvim ~/.config/dwm/config.h") },
+	{ MODKEY,            XK_comma,  spawn,          SHCMD(TERMINAL " -e nvim ~/src/dwm/config.h") },
 	{ MODKEY,            XK_v,      spawn,          SHCMD("pavctrl")},
 	{ MODKEY,            XK_Escape, spawn,          SHCMD("xfce4-taskmanager")},
 	{ MODKEY,            XK_x,      spawn,          SHCMD("arcolinux-logout")},
