@@ -22,8 +22,8 @@ static const char *colors[][3]  = {
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg    border     */
-	[SchemeNorm] = { 0xff, 0xaa, 0xaa },
-	[SchemeSel]  = { 0xff, 0xaa, 0xaa },
+	[SchemeNorm] = { 0xff, 0xdd, 0xdd },
+	[SchemeSel]  = { 0xff, 0xdd, 0xdd },
 };
 
 // dmenu
