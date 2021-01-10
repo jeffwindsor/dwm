@@ -1,11 +1,15 @@
-#define TERMINAL "alacritty"
+#define TERMINAL        "alacritty"
+#define FILES           "thunar"
+#define EDITOR          "emacs"
+#define WEB             "firefox"
+#define WALLPAPER       "variety"
+#define EXIT            "arcolinux-logout"
 
 #include "colors_tender.h"
-#include "selfrestart.c"
+#include "push.c"
 
 // bar
 static const char *tags[]   = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-#include "shiftview.c"
 static const int showbar    = 1;        /* 0 means no bar */
 static const int topbar     = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrains Mono Light:size=12" }; //{ "Noto Sans Mono:size=11"} 
@@ -18,8 +22,8 @@ static const char *colors[][3]      = {
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg    border     */
-	[SchemeNorm] = { OPAQUE, 0xdd, 0xdd },
-	[SchemeSel]  = { OPAQUE, 0xdd, 0xdd },
+	[SchemeNorm] = { 0xff, 0xdd, 0xdd },
+	[SchemeSel]  = { 0xff, 0xdd, 0xdd },
 };
 
 // dmenu
@@ -66,19 +70,19 @@ static const Layout layouts[]   = {
 /* commands */
 static Key keys[] = {
 	/* modifier          key        function        argument */
-	{ MODKEY|ShiftMask,  XK_r,      self_restart,   {0} },
+	//{ MODKEY|ShiftMask,  XK_r,      self_restart,   {0} },
 	{ MODKEY,            XK_space,  spawn,          {.v = dmenucmd} },
 	{ MODKEY,            XK_Return, spawn,          SHCMD(TERMINAL)},
-	{ MODKEY|ShiftMask,  XK_Return, spawn,          SHCMD("thunar")},
-	{ MODKEY|ControlMask,XK_Return, spawn,          SHCMD("firefox")},
+	{ MODKEY|ShiftMask,  XK_Return, spawn,          SHCMD(FILES)},
+	{ MODKEY|ControlMask,XK_Return, spawn,          SHCMD(WEB)},
 	{ MODKEY,            XK_period, spawn,          SHCMD("arcolinux-tweak-tool")},
 	{ MODKEY,            XK_comma,  spawn,          SHCMD(TERMINAL " -e nvim ~/.config/dwm/config.h") },
 	{ MODKEY,            XK_v,      spawn,          SHCMD("pavctrl")},
 	{ MODKEY,            XK_Escape, spawn,          SHCMD("xfce4-taskmanager")},
-	{ MODKEY,            XK_x,      spawn,          SHCMD("arcolinux-logout")},
-	{ MODKEY,            XK_e,      spawn,          SHCMD("emacs")},
-	{ ControlMask,       XK_Left,   spawn,          SHCMD("variety -p")},
-	{ ControlMask,       XK_Right,  spawn,          SHCMD("variety -n")},
+	{ MODKEY,            XK_x,      spawn,          SHCMD(EXIT)},
+	{ MODKEY,            XK_e,      spawn,          SHCMD(EDITOR)},
+	{ ControlMask,       XK_Left,   spawn,          SHCMD(WALLPAPER " -p")},
+	{ ControlMask,       XK_Right,  spawn,          SHCMD(WALLPAPER " -n")},
 	{ ControlMask,           XK_Up,     setgaps,        {.i = -1 } },
 	{ ControlMask,           XK_Down,   setgaps,        {.i = +1 } },
 	{ MODKEY,            XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -86,6 +90,8 @@ static Key keys[] = {
 	{ MODKEY,            XK_q,      killclient,     {0} },
     { MODKEY,            XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,            XK_l,      setmfact,       {.f = +0.05} },
+    { MODKEY,            XK_j,      pushdown,       {0} }, //push down in the window stack
+	{ MODKEY,            XK_k,      pushup,         {0} }, //push up in the window stack
 	{ MODKEY,            XK_equal,  incnmaster,     {.i = +1 } },
 	{ MODKEY,            XK_minus,  incnmaster,     {.i = -1 } },
 	{ MODKEY,            XK_Up,     focusstack,     {.i = +1 } },
@@ -131,3 +137,21 @@ static const Rule rules[] = {
 	{ "Arcolinux-welcome-app.py",  NULL,       NULL,       0,            1,           -1 },
 };
 
+static const char *const autostart[] = {
+    //"xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off"
+    //"xrandr --output eDP1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --primary --mode 3840x2160 --pos 1920x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off"
+    //"xrandr --output eDP1 --off --output DP1 --off --output HDMI1 --primary --mode 3840x2160 --pos 1920x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off"
+    "nm-applet", NULL,
+    "pamac-tray", NULL,
+    "variety", NULL,
+    "xfce4-power-manager", NULL,
+    "volumeicon", NULL,
+    "blueberry-tray", NULL,
+    "ssh-agent -s"   
+    "/usr/lib/xfce4/notifyd/xfce4-notifyd", NULL,
+    "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
+    "picom", "-b", "--config", "~/.config/picom/picom.conf", NULL,
+    "numlockx", "on", NULL,
+    "slstatus", NULL,
+	NULL
+};
