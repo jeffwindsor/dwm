@@ -9,11 +9,11 @@
 #include "push.c"
 
 // bar
-static const char *tags[]   = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-static const int showbar    = 1;        /* 0 means no bar */
-static const int topbar     = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrains Mono Light:size=12" }; //{ "Noto Sans Mono:size=11"} 
-static const char *colors[][3]      = {
+static const char *tags[]       = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const int showbar        = 1;        /* 0 means no bar */
+static const int topbar         = 1;        /* 0 means bottom bar */
+static const char *fonts[]      = { "JetBrains Mono Light:size=12" }; //{ "Noto Sans Mono:size=11"} 
+static const char *colors[][3]  = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_blue2, col_bg, col_bg },
 	[SchemeSel]  = { col_bg, col_blue3, col_blue3 },
@@ -22,8 +22,8 @@ static const char *colors[][3]      = {
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg    border     */
-	[SchemeNorm] = { 0xff, 0xdd, 0xdd },
-	[SchemeSel]  = { 0xff, 0xdd, 0xdd },
+	[SchemeNorm] = { 0xff, 0xaa, 0xaa },
+	[SchemeSel]  = { 0xff, 0xaa, 0xaa },
 };
 
 // dmenu
@@ -76,15 +76,15 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,  XK_Return, spawn,          SHCMD(FILES)},
 	{ MODKEY|ControlMask,XK_Return, spawn,          SHCMD(WEB)},
 	{ MODKEY,            XK_period, spawn,          SHCMD("arcolinux-tweak-tool")},
-	{ MODKEY,            XK_comma,  spawn,          SHCMD(TERMINAL " -e nvim ~/.config/dwm/config.h") },
+	{ MODKEY,            XK_comma,  spawn,          SHCMD(TERMINAL " -e nvim ~/src/dwm/config.h") },
 	{ MODKEY,            XK_v,      spawn,          SHCMD("pavctrl")},
 	{ MODKEY,            XK_Escape, spawn,          SHCMD("xfce4-taskmanager")},
 	{ MODKEY,            XK_x,      spawn,          SHCMD(EXIT)},
 	{ MODKEY,            XK_e,      spawn,          SHCMD(EDITOR)},
 	{ ControlMask,       XK_Left,   spawn,          SHCMD(WALLPAPER " -p")},
 	{ ControlMask,       XK_Right,  spawn,          SHCMD(WALLPAPER " -n")},
-	{ ControlMask,      XK_Up,     setgaps,        {.i = -1 } },
-	{ ControlMask,      XK_Down,   setgaps,        {.i = +1 } },
+	{ ControlMask,       XK_Up,     setgaps,        {.i = -1 } },
+	{ ControlMask,       XK_Down,   setgaps,        {.i = +1 } },
 	{ MODKEY,            XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,            XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,            XK_q,      killclient,     {0} },
@@ -147,10 +147,10 @@ static const char *const autostart[] = {
     "xfce4-power-manager", NULL,
     "volumeicon", NULL,
     "blueberry-tray", NULL,
-    "ssh-agent -s"   
+    "ssh-agent -s", NULL,   
     "/usr/lib/xfce4/notifyd/xfce4-notifyd", NULL,
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
-    "picom", "-b", "--config", "~/.config/picom/picom.conf", NULL,
+    "picom", "-b", NULL,
     "numlockx", "on", NULL,
     "slstatus", NULL,
 	NULL
