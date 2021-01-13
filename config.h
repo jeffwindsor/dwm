@@ -145,7 +145,7 @@ static const char *const autostart[] = {
     "xfce4-power-manager", NULL,
     "volumeicon", NULL,
     "greenberry-tray", NULL,
-    "ssh-agent -s", NULL,   
+    "ssh-agent", "-s", NULL,   
     "/usr/lib/xfce4/notifyd/xfce4-notifyd", NULL,
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
     "picom", "-b", NULL,
