@@ -28,9 +28,15 @@ static const unsigned int alphas[][3]      = {
 static char dmenumon[2] = "0";   /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", 
     "-m", dmenumon, 
+    "-c",           /* centered */ 
+    "-cw", "700",   /* line width */
+    "-l", "20",     /* lines */
+    "-bw", "5",     /* border width */
     "-fn", "JetBrains Mono Light:size=12", 
-    "-nf", col_green1, "-nb", col_bg,
-    "-sf", col_green1, "-sb", col_green4, 
+    "-nf", col_blue1, "-nb", col_bg,
+    "-sf", col_blue1, "-sb", col_blue5, 
+    "-nhf", col_yellow2, "-nhb", col_bg,
+    "-shf", col_yellow2, "-shb", col_blue5, 
     NULL };
 
 // systray
