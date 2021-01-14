@@ -16,7 +16,7 @@ static const char *fonts[]      = { "JetBrains Mono Light:size=12" }; //{ "Noto 
 static const char *colors[][3]  = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_blue1, col_bg, col_bg },
-	[SchemeSel]  = { col_blue1, col_blue4, col_blue4 },
+	[SchemeSel]  = { col_blue1, col_blue5, col_blue5 },
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg    border     */
@@ -145,7 +145,7 @@ static const char *const autostart[] = {
     "xfce4-power-manager", NULL,
     "volumeicon", NULL,
     "greenberry-tray", NULL,
-    "ssh-agent", "-s", NULL,   
+    //"ssh-agent", "-s", NULL,   
     "/usr/lib/xfce4/notifyd/xfce4-notifyd", NULL,
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
     "picom", "-b", NULL,
