@@ -4,6 +4,9 @@
 
 dwm
 
+*.orig
+*.rej
+
 ### C++ ###
 # Prerequisites
 *.d
