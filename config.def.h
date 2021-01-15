@@ -151,17 +151,18 @@ static const char *const autostart[] = {
     //"xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off"
     //"xrandr --output eDP1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --primary --mode 3840x2160 --pos 1920x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off"
     //"xrandr --output eDP1 --off --output DP1 --off --output HDMI1 --primary --mode 3840x2160 --pos 1920x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off"
-    "nm-applet", NULL,
-    "pamac-tray", NULL,
+    //"nm-applet", NULL,
+    //"pamac-tray", NULL,
     "variety", NULL,
     "xfce4-power-manager", NULL,
-    "volumeicon", NULL,
-    "greenberry-tray", NULL,
+    //"volumeicon", NULL,
+    //"blueberry-tray", NULL,
     //"ssh-agent", "-s", NULL,   
     "/usr/lib/xfce4/notifyd/xfce4-notifyd", NULL,
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
     "picom", "-b", NULL,
     "numlockx", "on", NULL,
-    "slstatus", NULL,
+    "dwmblocks", NULL,
+    //"slstatus", NULL,
 	NULL
 };
