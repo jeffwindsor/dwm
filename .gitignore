@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=cmake,c++
 
 dwm
-
+config.h  # make clean copies def.h
 *.orig
 *.rej
 
