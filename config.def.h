@@ -4,20 +4,35 @@
 #define WEB             "firefox"
 #define WALLPAPER       "variety"
 #define EXIT            "arcolinux-logout"
+#define SCRN_BR_UP      "xbacklight -inc 15"
+#define SCRN_BR_DOWN    "xbacklight -dec 15"
+#define VOL_UP          "amixer set Master 10%+"
+#define VOL_DOWN        "amixer set Master 10%-"
+#define VOL_MUTE        "amixer -D pulse set Master 1+ toggle"
+#define MIC_MUTE        ""
+#define LOCK_SCRN       ""
+#define PRINT_SCRN      ""
+#define AIRPLANE_TGL    ""
+#define MEDIA_PLAY      ""
+#define MEDIA_STOP      ""
+#define MEDIA_FRWD      ""
+#define MEDIA_BACK      ""
 
-#include "colors_tender.h"
+
+//#include "<X11/XF86keysym.h>"   /* multimedia keys */
+#include "colors_tender.h"      /* color scheme */
 #include "push.c"
 
-static const char font[]        = "JetBrains Mono Light:size=14";
+static const char font[]        = "JetBrains Mono Light:size=14"; //{ "Noto Sans Mono:size=11"} 
 static const char icons[]       = "FontAwesome:size=14";
+
 // bar
 static const int showbar        = 1;  /* 0 means no bar */
 static const int topbar         = 1;  /* 0 means bottom bar */
 static const int horizpadbar    = 0;  /* horizontal padding for statusbar */
 static const int vertpadbar     = 7;  /* vertical padding for statusbar */
-//static const char *tags[]       = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tags[]       = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-static const char *fonts[]      = { font, icons }; //{ "Noto Sans Mono:size=11"} 
+static const char *fonts[]      = { font, icons };
 static const char *colors[][3]  = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_blue1, col_bg, col_bg },
@@ -33,13 +48,13 @@ static const unsigned int alphas[][3]      = {
 static char dmenumon[2] = "0";   /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", 
     "-m", dmenumon, 
-    "-c",           /* centered */ 
-    "-cw", "700",   /* line width */
-    "-l", "20",     /* lines */
-    "-bw", "5",     /* border width */
-    "-fn", font, 
-    "-nf", col_blue1, "-nb", col_bg,
-    "-sf", col_blue1, "-sb", col_blue5, 
+    "-c",            /* centered */ 
+    "-cw",  "700",   /* line width */
+    "-l",   "20",    /* lines */
+    "-bw",  "5",     /* border width */
+    "-fn",  font, 
+    "-nf",  col_blue1, "-nb", col_bg,
+    "-sf",  col_blue1, "-sb", col_blue5, 
     "-nhf", col_yellow2, "-nhb", col_bg,
     "-shf", col_yellow2, "-shb", col_blue5, 
     NULL };
@@ -92,25 +107,38 @@ static Key keys[] = {
 	{ MODKEY,            XK_e,      spawn,          SHCMD(EDITOR)},
 	{ ControlMask,       XK_Left,   spawn,          SHCMD(WALLPAPER " -p")},
 	{ ControlMask,       XK_Right,  spawn,          SHCMD(WALLPAPER " -n")},
-	{ ControlMask,       XK_Up,     setgaps,        {.i = -1 } },
-	{ ControlMask,       XK_Down,   setgaps,        {.i = +1 } },
+	{ ShiftMask,         XK_Left,   setgaps,        {.i = -1 } },
+	{ ShiftMask,         XK_Right,  setgaps,        {.i = +1 } },
 	{ MODKEY,            XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,            XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,            XK_q,      killclient,     {0} },
 	{ MODKEY|ControlMask,XK_q,      quit,           {1} },
     { MODKEY,            XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,            XK_l,      setmfact,       {.f = +0.05} },
     { MODKEY,            XK_j,      pushdown,       {0} }, //push down in the window stack
 	{ MODKEY,            XK_k,      pushup,         {0} }, //push up in the window stack
-	{ MODKEY,            XK_equal,  incnmaster,     {.i = +1 } },
-	{ MODKEY,            XK_minus,  incnmaster,     {.i = -1 } },
-	{ MODKEY,            XK_Up,     focusstack,     {.i = +1 } },
-	{ MODKEY,            XK_Down,   focusstack,     {.i = -1 } },
-	//{ 0, XF86XK_MonBrightnessUp,    spawn,          SHCMD("xbacklight -inc 15") },
-	//{ 0, XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 15") },
-	//{ 0, XF86XK_AudioRaiseVolume,   spawn,          SHCMD("amixer set Master 10%+") },
-	//{ 0, XF86XK_AudioLowerVolume,   spawn,          SHCMD("amixer set Master 10%-") },
-	//{ 0, XF86XK_AudioMute,          spawn,          SHCMD("amixer -D pulse set Master 1+ toggle") },
+	{ MODKEY,            XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY|ControlMask,XK_h,      incnmaster,     {.i = -1 } },
+	{ MODKEY|ControlMask,XK_j,      focusstack,     {.i = -1 } },
+	{ MODKEY|ControlMask,XK_k,      focusstack,     {.i = +1 } },
+	{ MODKEY|ControlMask,XK_l,      incnmaster,     {.i = +1 } },
+	{ MODKEY,            XK_F12,    spawn,          SHCMD(SCRN_BR_UP) },
+	{ MODKEY,            XK_F11,    spawn,          SHCMD(SCRN_BR_DOWN) },
+	{ MODKEY,            XK_F3,     spawn,          SHCMD(VOL_UP) },
+	{ MODKEY,            XK_F2,     spawn,          SHCMD(VOL_DOWN) },
+	{ MODKEY,            XK_F1,     spawn,          SHCMD(VOL_MUTE) },
+    { MODKEY,            XK_F4,     spawn,          SHCMD(MIC_MUTE) },
+    { MODKEY,            XK_F9,     spawn,          SHCMD(LOCK_SCRN)},
+    { MODKEY,            XK_Print,  spawn,          SHCMD(PRINT_SCRN)},
+    { MODKEY,            XK_F7,     spawn,          SHCMD(AIRPLANE_TGL)},
+    //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_PLAY)},
+    //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_STOP)},
+    //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_FRWD)},
+    //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_BACK)},
+	//{ 0, XF86XK_MonBrightnessUp,    spawn,          SHCMD(SCRN_BR_UP) },
+	//{ 0, XF86XK_MonBrightnessDown,  spawn,          SHCMD(SCRN_BR_DOWN) },
+	//{ 0, XF86XK_AudioRaiseVolume,   spawn,          SHCMD(VOL_UP) },
+	//{ 0, XF86XK_AudioLowerVolume,   spawn,          SHCMD(VOL_DOWN) },
+	//{ 0, XF86XK_AudioMute,          spawn,          SHCMD(VOL_MUTE) },
 	TAGKEYS(             XK_1,                      0)
 	TAGKEYS(             XK_2,                      1)
 	TAGKEYS(             XK_3,                      2)
