@@ -31,7 +31,7 @@ static const int showbar        = 1;  /* 0 means no bar */
 static const int topbar         = 1;  /* 0 means bottom bar */
 static const int horizpadbar    = 0;  /* horizontal padding for statusbar */
 static const int vertpadbar     = 7;  /* vertical padding for statusbar */
-static const char *tags[]       = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[]       = { "", "2", "3", "4", "5", "6", "7", "8", "" };
 static const char *fonts[]      = { font, icons };
 static const char *colors[][3]  = {
 	/*               fg         bg         border   */
