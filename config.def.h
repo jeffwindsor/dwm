@@ -95,6 +95,7 @@ static const Layout layouts[]            = {      /* symbom arrange function */
 static Key keys[] = {
 	/* modifier          key        function        argument */
 	{ MODKEY,            XK_space,  spawn,          {.v = dmenucmd} },
+	{ MODKEY|ControlMask,XK_space,  spawn,          SHCMD("ls -p $HOME/.local/scripts | rg -v / | dmenu") },
 	{ MODKEY,            XK_Return, spawn,          SHCMD(TERMINAL)},
 	{ MODKEY|ShiftMask,  XK_Return, spawn,          SHCMD(FILES)},
 	{ MODKEY|ControlMask,XK_Return, spawn,          SHCMD(WEB)},
