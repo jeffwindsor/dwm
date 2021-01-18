@@ -21,34 +21,39 @@
 #define SCRN_EXTERN     "/home/dev/.screenlayout/laptop-closed-with-lg.sh"
 #define SCRN_BOTH       "/home/dev/.screenlayout/laptop-with-lg.sh"
 
-
 //#include "<X11/XF86keysym.h>"   /* multimedia keys */
 #include "colors_tender.h"      /* color scheme */
 #include "push.c"
 
-static const char font[]        = "JetBrains Mono Light:size=14"; //{ "Noto Sans Mono:size=11"} 
-static const char icons[]       = "FontAwesome:size=14";
+static const char font[]              = "JetBrains Mono Light:size=14"; //{ "Noto Sans Mono:size=11"} 
+static const char icons[]             = "FontAwesome:size=14";
 
-// bar
-static const int showbar        = 1;  /* 0 means no bar */
-static const int topbar         = 1;  /* 0 means bottom bar */
-static const int horizpadbar    = 0;  /* horizontal padding for statusbar */
-static const int vertpadbar     = 7;  /* vertical padding for statusbar */
-static const char *tags[]       = { "", "2", "3", "4", "5", "6", "7", "8", "" };
-static const char *fonts[]      = { font, icons };
-static const char *colors[][3]  = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_blue1, col_bg, col_bg },
-	[SchemeSel]  = { col_blue1, col_blue5, col_blue5 },
+/* bar */
+static const int showbar              = 1;  /* 0 means no bar */
+static const int topbar               = 1;  /* 0 means bottom bar */
+static const int horizpadbar          = 0;  /* horizontal padding for statusbar */
+static const int vertpadbar           = 7;  /* vertical padding for statusbar */
+static const char *tags[]             = { "", "2", "3", "4", "5", "6", "7", "8", "" };
+static const char *fonts[]            = { font, icons };
+static const char *colors[][3]        = {                   /* fg bg border */
+    //[SchemeTagsSel]  = { col_yellow1, col_yellow5, col_yellow5 }, // Tagbar left selected {text,background,not used but cannot be empty}
+    //[SchemeTagsNorm] = { col_yellow1, col_darker, col_darker },    // Tagbar left unselected {text,background,not used but cannot be empty}
+    [SchemeTagsSel]  = { col_green1, col_green4, col_green4 }, // Tagbar left selected {text,background,not used but cannot be empty}
+    [SchemeTagsNorm] = { col_green1, col_darker, col_darker },    // Tagbar left unselected {text,background,not used but cannot be empty}
+    [SchemeInfoSel]  = { col_blue1, col_blue5, col_blue5 } , // infobar middle  selected {text,background,not used but cannot be empty}
+    [SchemeInfoNorm] = { col_blue1, col_darker, col_darker },    // infobar middle  unselected {text,background,not used but cannot be empty}
+	[SchemeStatus]   = { col_blue1, col_darker, col_darker },    // Statusbar right {text,background,not used but cannot be empty}
 };
-static const unsigned int alphas[][3]      = {
-	/*               fg      bg    border     */
-	[SchemeNorm] = { 0xff, 0xbb, 0xbb },
-	[SchemeSel]  = { 0xff, 0xbb, 0xbb },
+static const unsigned int alphas[][3] = {        /* fg bg border */
+	[SchemeTagsSel]  = { 0xff, 0xbb, 0xbb },     // Tagbar left selected {text,background,not used but cannot be empty}
+    [SchemeTagsNorm] = { 0xff, 0xbb, 0xbb },     // Tagbar left unselected {text,background,not used but cannot be empty}
+    [SchemeInfoSel]  = { 0xff, 0xbb, 0xbb },     // infobar middle  selected {text,background,not used but cannot be empty}
+    [SchemeInfoNorm] = { 0xff, 0xbb, 0xbb },     // infobar middle  unselected {text,background,not used but cannot be empty}
+	[SchemeStatus]   = { 0xff, 0xbb, 0xbb },     // Statusbar right {text,background,not used but cannot be empty}
 };
 
-// dmenu
-static char dmenumon[2] = "0";   /* component of dmenucmd, manipulated in spawn() */
+/* dmenu */
+static char dmenumon[2]       = "0";   /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", 
     "-m", dmenumon, 
     "-c",            /* centered */ 
@@ -62,24 +67,23 @@ static const char *dmenucmd[] = { "dmenu_run",
     "-shf", col_yellow2, "-shb", col_blue5, 
     NULL };
 
-// systray
-static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayspacing = 0;   /* systray spacing */
-static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+/* systray */
+static const unsigned int systraypinning = 0;     /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayspacing = 0;     /* systray spacing */
+static const int systraypinningfailfirst = 1;     /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray             = 0;     /* 0 means no systray */
 
-// windows
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
+/* windows */
+static const unsigned int borderpx       = 1;     /* border pixel of windows */
+static const unsigned int gappx          = 5;     /* gaps between windows */
+static const unsigned int snap           = 32;    /* snap pixel */
 
-// layout(s)
-static const float mfact        = 0.55; /* factor of master area size [0.05..0.95] */
-static const int nmaster        = 1;    /* number of clients in master area */
-static const int resizehints    = 1;    /* 1 means respect size hints in tiled resizals */
-static const Layout layouts[]   = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },               /* first entry is default */
+/* layout(s) */
+static const float mfact                 = 0.55;  /* factor of master area size [0.05..0.95] */
+static const int nmaster                 = 1;     /* number of clients in master area */
+static const int resizehints             = 1;     /* 1 means respect size hints in tiled resizals */
+static const Layout layouts[]            = {      /* symbom arrange function */
+	{ "[]=",      tile },                         /* first entry is default */
 	{ "[M]",      monocle },
 };
 
