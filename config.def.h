@@ -58,18 +58,7 @@ static const unsigned int alphas[][3] = {        /* fg bg border */
 
 /* dmenu */
 static char dmenumon[2]       = "0";   /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", 
-    "-m", dmenumon, 
-    "-c",            /* centered */ 
-    "-cw",  "700",   /* line width */
-    "-l",   "20",    /* lines */
-    "-bw",  "5",     /* border width */
-    "-fn",  font, 
-    "-nf",  col_blue1, "-nb", col_bg,
-    "-sf",  col_blue1, "-sb", col_blue5, 
-    "-nhf", col_yellow1, "-nhb", col_bg,
-    "-shf", col_yellow1, "-shb", col_blue5, 
-    NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
 
 /* systray */
 static const unsigned int systraypinning = 0;     /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
