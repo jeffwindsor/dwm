@@ -17,32 +17,36 @@
 #define MEDIA_STOP      ""
 #define MEDIA_FRWD      ""
 #define MEDIA_BACK      ""
-#define SCRN_LAPTOP     "/home/dev/.screenlayout/laptop-only.sh"
-#define SCRN_EXTERN     "/home/dev/.screenlayout/laptop-closed-with-lg.sh"
-#define SCRN_BOTH       "/home/dev/.screenlayout/laptop-with-lg.sh"
+#define SELECT_MONITOR  "/home/dev/.config/dmenu/monitor"
 
 //#include "<X11/XF86keysym.h>"   /* multimedia keys */
 #include "colors_tender.h"      /* color scheme */
 #include "push.c"
 
-static const char font[]              = "JetBrains Mono Light:size=14"; //{ "Noto Sans Mono:size=11"} 
-static const char icons[]             = "FontAwesome:size=14";
+static const char font[]      = "JetBrains Mono Light:size=14"; //{ "Noto Sans Mono:size=11"} 
+static const char icons[]     = "FontAwesome:size=14";
+//static const char *rs[]       = { col_red1, col_red5, col_red5 };
+//static const char *rn[]       = { col_red1, col_darker, col_darker };
+//static const char *ys[]       = { col_yellow1, col_yellow5, col_yellow5 };
+//static const char *yn[]       = { col_yellow1, col_darker, col_darker };
+//static const char *gs[]       = { col_green1, col_green4, col_green4 };
+//static const char *gn[]       = { col_green1, col_darker, col_darker };
+//static const char *bs[]       = { col_blue1, col_blue5, col_blue5 };
+//static const char *bn[]       = { col_blue1, col_darker, col_darker };
 
 /* bar */
-static const int showbar              = 1;  /* 0 means no bar */
-static const int topbar               = 1;  /* 0 means bottom bar */
-static const int horizpadbar          = 0;  /* horizontal padding for statusbar */
-static const int vertpadbar           = 7;  /* vertical padding for statusbar */
-static const char *tags[]             = { "", "2", "3", "4", "5", "6", "7", "8", "" };
-static const char *fonts[]            = { font, icons };
-static const char *colors[][3]        = {                   /* fg bg border */
-    //[SchemeTagsSel]  = { col_yellow1, col_yellow5, col_yellow5 }, // Tagbar left selected {text,background,not used but cannot be empty}
-    //[SchemeTagsNorm] = { col_yellow1, col_darker, col_darker },    // Tagbar left unselected {text,background,not used but cannot be empty}
-    [SchemeTagsSel]  = { col_green1, col_green4, col_green4 }, // Tagbar left selected {text,background,not used but cannot be empty}
-    [SchemeTagsNorm] = { col_green1, col_darker, col_darker },    // Tagbar left unselected {text,background,not used but cannot be empty}
-    [SchemeInfoSel]  = { col_blue1, col_blue5, col_blue5 } , // infobar middle  selected {text,background,not used but cannot be empty}
-    [SchemeInfoNorm] = { col_blue1, col_darker, col_darker },    // infobar middle  unselected {text,background,not used but cannot be empty}
-	[SchemeStatus]   = { col_blue1, col_darker, col_darker },    // Statusbar right {text,background,not used but cannot be empty}
+static const int showbar      = 1;  /* 0 means no bar */
+static const int topbar       = 1;  /* 0 means bottom bar */
+static const int horizpadbar  = 0;  /* horizontal padding for statusbar */
+static const int vertpadbar   = 7;  /* vertical padding for statusbar */
+static const char *tags[]     = { "", "", "3", "4", "5", "6", "7", "8", "9" };
+static const char *fonts[]    = { font, icons };
+static const char *colors[][3]= {
+	[SchemeStatus]   = { col_blue1, col_darker, col_darker },
+    [SchemeTagsSel]  = { col_blue1, col_blue5, col_blue5 },
+    [SchemeTagsNorm] = { col_blue1, col_darker, col_darker },
+    [SchemeInfoSel] = { col_blue1, col_blue5, col_blue5 },
+    [SchemeInfoNorm]  = { col_blue1, col_darker, col_darker },
 };
 static const unsigned int alphas[][3] = {        /* fg bg border */
 	[SchemeTagsSel]  = { 0xff, 0xbb, 0xbb },     // Tagbar left selected {text,background,not used but cannot be empty}
@@ -63,8 +67,8 @@ static const char *dmenucmd[] = { "dmenu_run",
     "-fn",  font, 
     "-nf",  col_blue1, "-nb", col_bg,
     "-sf",  col_blue1, "-sb", col_blue5, 
-    "-nhf", col_yellow2, "-nhb", col_bg,
-    "-shf", col_yellow2, "-shb", col_blue5, 
+    "-nhf", col_yellow1, "-nhb", col_bg,
+    "-shf", col_yellow1, "-shb", col_blue5, 
     NULL };
 
 /* systray */
@@ -133,9 +137,8 @@ static Key keys[] = {
 	{ MODKEY,            XK_F3,     spawn,          SHCMD(VOL_UP) },
     { MODKEY,            XK_F4,     spawn,          SHCMD(MIC_MUTE) },
     { MODKEY,            XK_F7,     spawn,          SHCMD(AIRPLANE_TGL)},
-	{ MODKEY,            XK_F10,    spawn,          SHCMD(SCRN_LAPTOP) }, // RANDR to LAPTOP SCREEN
     { MODKEY,            XK_F9,     spawn,          SHCMD(LOCK_SCRN)},
-	{ MODKEY,            XK_F10,    spawn,          SHCMD(SCRN_EXTERN) }, // RANDER to EXTERNAL LG 4K
+	{ MODKEY,            XK_F10,    spawn,          SHCMD(SELECT_MONITOR) }, // RANDER to EXTERNAL LG 4K
 	{ MODKEY,            XK_F11,    spawn,          SHCMD(SCRN_BR_DOWN) },
 	{ MODKEY,            XK_F12,    spawn,          SHCMD(SCRN_BR_UP) },
     { MODKEY,            XK_Print,  spawn,          SHCMD(PRINT_SCRN)},
