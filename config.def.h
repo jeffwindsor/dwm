@@ -17,6 +17,9 @@
 #define MEDIA_STOP      ""
 #define MEDIA_FRWD      ""
 #define MEDIA_BACK      ""
+#define SCRN_LAPTOP     "/home/dev/.screenlayout/laptop-only.sh"
+#define SCRN_EXTERN     "/home/dev/.screenlayout/laptop-closed-with-lg.sh"
+#define SCRN_BOTH       "/home/dev/.screenlayout/laptop-with-lg.sh"
 
 
 //#include "<X11/XF86keysym.h>"   /* multimedia keys */
@@ -94,7 +97,6 @@ static const Layout layouts[]   = {
 /* commands */
 static Key keys[] = {
 	/* modifier          key        function        argument */
-	//{ MODKEY|ShiftMask,  XK_r,      self_restart,   {0} },
 	{ MODKEY,            XK_space,  spawn,          {.v = dmenucmd} },
 	{ MODKEY,            XK_Return, spawn,          SHCMD(TERMINAL)},
 	{ MODKEY|ShiftMask,  XK_Return, spawn,          SHCMD(FILES)},
@@ -113,6 +115,7 @@ static Key keys[] = {
 	{ MODKEY,            XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,            XK_q,      killclient,     {0} },
 	{ MODKEY|ControlMask,XK_q,      quit,           {1} },
+	{ MODKEY|ControlMask,XK_r,      quit,           {1} },
     { MODKEY,            XK_h,      setmfact,       {.f = -0.05} },
     { MODKEY,            XK_j,      pushdown,       {0} }, //push down in the window stack
 	{ MODKEY,            XK_k,      pushup,         {0} }, //push up in the window stack
@@ -121,15 +124,17 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,XK_j,      focusstack,     {.i = -1 } },
 	{ MODKEY|ControlMask,XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY|ControlMask,XK_l,      incnmaster,     {.i = +1 } },
-	{ MODKEY,            XK_F12,    spawn,          SHCMD(SCRN_BR_UP) },
-	{ MODKEY,            XK_F11,    spawn,          SHCMD(SCRN_BR_DOWN) },
-	{ MODKEY,            XK_F3,     spawn,          SHCMD(VOL_UP) },
-	{ MODKEY,            XK_F2,     spawn,          SHCMD(VOL_DOWN) },
 	{ MODKEY,            XK_F1,     spawn,          SHCMD(VOL_MUTE) },
+	{ MODKEY,            XK_F2,     spawn,          SHCMD(VOL_DOWN) },
+	{ MODKEY,            XK_F3,     spawn,          SHCMD(VOL_UP) },
     { MODKEY,            XK_F4,     spawn,          SHCMD(MIC_MUTE) },
-    { MODKEY,            XK_F9,     spawn,          SHCMD(LOCK_SCRN)},
-    { MODKEY,            XK_Print,  spawn,          SHCMD(PRINT_SCRN)},
     { MODKEY,            XK_F7,     spawn,          SHCMD(AIRPLANE_TGL)},
+	{ MODKEY,            XK_F10,    spawn,          SHCMD(SCRN_LAPTOP) }, // RANDR to LAPTOP SCREEN
+    { MODKEY,            XK_F9,     spawn,          SHCMD(LOCK_SCRN)},
+	{ MODKEY,            XK_F10,    spawn,          SHCMD(SCRN_EXTERN) }, // RANDER to EXTERNAL LG 4K
+	{ MODKEY,            XK_F11,    spawn,          SHCMD(SCRN_BR_DOWN) },
+	{ MODKEY,            XK_F12,    spawn,          SHCMD(SCRN_BR_UP) },
+    { MODKEY,            XK_Print,  spawn,          SHCMD(PRINT_SCRN)},
     //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_PLAY)},
     //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_STOP)},
     //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_FRWD)},
@@ -150,42 +155,45 @@ static Key keys[] = {
 	TAGKEYS(             XK_9,                      8)
 };
 
+/*    click                event mask      button          function        argument */
 static Button buttons[] = {
-       /* click                event mask      button          function        argument */
-       { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-       { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-       { ClkWinTitle,          0,              Button2,        zoom,           {0} },
-       //{ ClkStatusText,        0,              Button1,        spawn,          {.v = taskcmd } },
-       //{ ClkStatusText,        0,              Button2,        spawn,          {.v = filecmd } },
-       //{ ClkStatusText,        0,              Button3,        spawn,          {.v = calendar } },
-       { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-       { ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-       { ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-       { ClkTagBar,            0,              Button1,        view,           {0} },
-       { ClkTagBar,            0,              Button3,        toggleview,     {0} },
-       { ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-       { ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+    
+    /* layout icon on bar */
+    { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },  //cycle layouts
+
+    /* title portion of bar */
+    //{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
+    
+    /* status portion of bar */
+    //{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1 } }, //SIGNAL DWMBLOCKS >> $BLOCKBUTTON = 1 
+    //{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2 } }, //SIGNAL DWMBLOCKS >> $BLOCKBUTTON = 2   
+    //{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3 } }, //SIGNAL DWMBLOCKS >> $BLOCKBUTTON = 3 
+
+    /* tag portion of bar */
+    { ClkTagBar,            0,              Button1,        view,           {0} }, // select tag
+    { ClkTagBar,            MODKEY,         Button1,        tag,            {0} }, // move window to tag
+
+    /* windows */
+    //{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
+    //{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
+    //{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 };
 
 static const Rule rules[] = {
 	/* class                       instance    title      tags mask      isfloating   monitor */
-	{ "Gimp",                      NULL,       NULL,       0,            0,           -1 },
-	{ "Xfce4-terminal",            NULL,       NULL,       0,            1,           -1 },
+	//{ "Gimp",                      NULL,       NULL,       0,            0,           -1 },
+	//{ "Xfce4-terminal",            NULL,       NULL,       0,            1,           -1 },
 	{ "firefox",                   NULL,       NULL,       0,            0,           -1 },
 	{ "Arcolinux-welcome-app.py",  NULL,       NULL,       0,            1,           -1 },
 };
 
 static const char *const autostart[] = {
-    //"xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off"
-    //"xrandr --output eDP1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --primary --mode 3840x2160 --pos 1920x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off"
-    //"xrandr --output eDP1 --off --output DP1 --off --output HDMI1 --primary --mode 3840x2160 --pos 1920x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off"
     //"nm-applet", NULL,
     //"pamac-tray", NULL,
-    "variety", NULL,
-    //"nitrogen", "-restore", NULL,
-    "xfce4-power-manager", NULL,
     //"volumeicon", NULL,
     //"blueberry-tray", NULL,
+    "variety", NULL,
+    "xfce4-power-manager", NULL,
     "/usr/lib/xfce4/notifyd/xfce4-notifyd", NULL,
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
     "picom", "-b", NULL,
