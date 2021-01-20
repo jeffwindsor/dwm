@@ -23,8 +23,8 @@
 #include "colors_tender.h"      /* color scheme */
 #include "push.c"
 
-static const char font[]      = "JetBrains Mono Light:size=14"; //{ "Noto Sans Mono:size=11"} 
-static const char icons[]     = "FontAwesome:size=14";
+static const char font[]      = "JetBrains Mono Light:size=12"; //{ "Noto Sans Mono:size=11"} 
+static const char icons[]     = "FontAwesome:size=12";
 //static const char *rs[]       = { col_red1, col_red5, col_red5 };
 //static const char *rn[]       = { col_red1, col_darker, col_darker };
 //static const char *ys[]       = { col_yellow1, col_yellow5, col_yellow5 };
@@ -49,11 +49,11 @@ static const char *colors[][3]= {
     [SchemeInfoNorm] = { col_blue1, col_darker, col_darker },
 };
 static const unsigned int alphas[][3] = {        /* fg bg border */
-	[SchemeTagsSel]  = { 0xff, 0xbb, 0xbb },     // Tagbar left selected {text,background,not used but cannot be empty}
-    [SchemeTagsNorm] = { 0xff, 0xbb, 0xbb },     // Tagbar left unselected {text,background,not used but cannot be empty}
-    [SchemeInfoSel]  = { 0xff, 0xbb, 0xbb },     // infobar middle  selected {text,background,not used but cannot be empty}
-    [SchemeInfoNorm] = { 0xff, 0xbb, 0xbb },     // infobar middle  unselected {text,background,not used but cannot be empty}
-	[SchemeStatus]   = { 0xff, 0xbb, 0xbb },     // Statusbar right {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { 0xff, 0xbb, 0xff },     // Tagbar left selected {text,background,not used but cannot be empty}
+    [SchemeTagsNorm] = { 0xff, 0xbb, 0xff },     // Tagbar left unselected {text,background,not used but cannot be empty}
+    [SchemeInfoSel]  = { 0xff, 0xbb, 0xff },     // infobar middle  selected {text,background,not used but cannot be empty}
+    [SchemeInfoNorm] = { 0xff, 0xbb, 0xff },     // infobar middle  unselected {text,background,not used but cannot be empty}
+	[SchemeStatus]   = { 0xff, 0xbb, 0xff },     // Statusbar right {text,background,not used but cannot be empty}
 };
 
 /* dmenu */
@@ -64,7 +64,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
 static const unsigned int systraypinning = 0;     /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 0;     /* systray spacing */
 static const int systraypinningfailfirst = 1;     /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray             = 0;     /* 0 means no systray */
+static const int showsystray             = 1;     /* 0 means no systray */
 
 /* windows */
 static const unsigned int borderpx       = 1;     /* border pixel of windows */
@@ -185,10 +185,10 @@ static const Rule rules[] = {
 };
 
 static const char *const autostart[] = {
-    //"nm-applet", NULL,
-    //"pamac-tray", NULL,
-    //"volumeicon", NULL,
-    //"blueberry-tray", NULL,
+    "nm-applet", NULL,
+    "pamac-tray", NULL,
+    "volumeicon", NULL,
+    "blueberry-tray", NULL,
     "variety", NULL,
     "xfce4-power-manager", NULL,
     "/usr/lib/xfce4/notifyd/xfce4-notifyd", NULL,
