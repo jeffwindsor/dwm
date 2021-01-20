@@ -45,8 +45,8 @@ static const char *colors[][3]= {
 	[SchemeStatus]   = { col_blue1, col_darker, col_darker },
     [SchemeTagsSel]  = { col_blue1, col_blue5, col_blue5 },
     [SchemeTagsNorm] = { col_blue1, col_darker, col_darker },
-    [SchemeInfoSel] = { col_blue1, col_blue5, col_blue5 },
-    [SchemeInfoNorm]  = { col_blue1, col_darker, col_darker },
+    [SchemeInfoSel]  = { col_blue1, col_blue5, col_blue2 },
+    [SchemeInfoNorm] = { col_blue1, col_darker, col_darker },
 };
 static const unsigned int alphas[][3] = {        /* fg bg border */
 	[SchemeTagsSel]  = { 0xff, 0xbb, 0xbb },     // Tagbar left selected {text,background,not used but cannot be empty}
