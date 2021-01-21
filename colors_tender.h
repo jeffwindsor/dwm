@@ -2,8 +2,10 @@
 static const char col_blue1[]       = "#b3deef";
 static const char col_blue2[]       = "#73cef4";
 static const char col_blue3[]       = "#44778d";
-static const char col_blue4[]       = "#335261";
-static const char col_blue5[]       = "#293b44";
+static const char col_blue4[]       = "#293b44";
+static const char col_blue5[]       = "#212f36";
+static const char col_blue6[]       = "#192329";
+static const char col_blue7[]       = "#10181b";
 
 static const char col_green1[]      = "#c9d05c";
 static const char col_green3[]      = "#6a6b3f";

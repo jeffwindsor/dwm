@@ -25,14 +25,6 @@
 
 static const char font[]      = "JetBrains Mono Light:size=12"; //{ "Noto Sans Mono:size=11"} 
 static const char icons[]     = "FontAwesome:size=12";
-//static const char *rs[]       = { col_red1, col_red5, col_red5 };
-//static const char *rn[]       = { col_red1, col_darker, col_darker };
-//static const char *ys[]       = { col_yellow1, col_yellow5, col_yellow5 };
-//static const char *yn[]       = { col_yellow1, col_darker, col_darker };
-//static const char *gs[]       = { col_green1, col_green4, col_green4 };
-//static const char *gn[]       = { col_green1, col_darker, col_darker };
-//static const char *bs[]       = { col_blue1, col_blue5, col_blue5 };
-//static const char *bn[]       = { col_blue1, col_darker, col_darker };
 
 /* bar */
 static const int showbar      = 1;  /* 0 means no bar */
@@ -42,11 +34,11 @@ static const int vertpadbar   = 7;  /* vertical padding for statusbar */
 static const char *tags[]     = { "", "", "3", "4", "5", "6", "7", "8", "9" };
 static const char *fonts[]    = { font, icons };
 static const char *colors[][3]= {
-	[SchemeStatus]   = { col_blue1, col_darker, col_darker },
-    [SchemeTagsSel]  = { col_blue1, col_blue5, col_blue5 },
-    [SchemeTagsNorm] = { col_blue1, col_darker, col_darker },
-    [SchemeInfoSel]  = { col_blue1, col_blue5, col_blue2 },
-    [SchemeInfoNorm] = { col_blue1, col_darker, col_darker },
+	[SchemeStatus]   = { col_blue1, col_blue7, col_blue1 },
+    [SchemeTagsSel]  = { col_blue1, col_blue5, col_blue1 },
+    [SchemeTagsNorm] = { col_blue1, col_blue7, col_blue1 },
+    [SchemeInfoSel]  = { col_blue1, col_blue5, col_blue3 },
+    [SchemeInfoNorm] = { col_blue1, col_blue7, col_blue4 },
 };
 static const unsigned int alphas[][3] = {        /* fg bg border */
 	[SchemeTagsSel]  = { 0xff, 0xbb, 0xff },     // Tagbar left selected {text,background,not used but cannot be empty}
