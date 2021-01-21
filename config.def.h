@@ -1,30 +1,7 @@
-#define TERMINAL        "alacritty"
-#define FILES           "thunar"
-#define EDITOR          "emacs"
-#define WEB             "firefox"
-#define WALLPAPER       "variety"
-#define EXIT            "arcolinux-logout"
-#define SCRN_BR_UP      "xbacklight -inc 15"
-#define SCRN_BR_DOWN    "xbacklight -dec 15"
-#define VOL_UP          "amixer set Master 10%+"
-#define VOL_DOWN        "amixer set Master 10%-"
-#define VOL_MUTE        "amixer -D pulse set Master 1+ toggle"
-#define MIC_MUTE        ""
-#define LOCK_SCRN       ""
-#define PRINT_SCRN      ""
-#define AIRPLANE_TGL    ""
-#define MEDIA_PLAY      ""
-#define MEDIA_STOP      ""
-#define MEDIA_FRWD      ""
-#define MEDIA_BACK      ""
 #define SELECT_MONITOR  "/home/dev/.config/dmenu/monitor"
 
-//#include "<X11/XF86keysym.h>"   /* multimedia keys */
 #include "colors_tender.h"      /* color scheme */
 #include "push.c"
-
-static const char font[]      = "JetBrains Mono Light:size=12"; //{ "Noto Sans Mono:size=11"} 
-static const char icons[]     = "FontAwesome:size=12";
 
 /* bar */
 static const int showbar      = 1;  /* 0 means no bar */
@@ -32,20 +9,14 @@ static const int topbar       = 1;  /* 0 means bottom bar */
 static const int horizpadbar  = 0;  /* horizontal padding for statusbar */
 static const int vertpadbar   = 7;  /* vertical padding for statusbar */
 static const char *tags[]     = { "", "", "3", "4", "5", "6", "7", "8", "9" };
-static const char *fonts[]    = { font, icons };
-static const char *colors[][3]= {
-	[SchemeStatus]   = { col_blue1, col_blue7, col_blue1 },
-    [SchemeTagsSel]  = { col_blue1, col_blue5, col_blue1 },
-    [SchemeTagsNorm] = { col_blue1, col_blue7, col_blue1 },
-    [SchemeInfoSel]  = { col_blue1, col_blue5, col_blue3 },
-    [SchemeInfoNorm] = { col_blue1, col_blue7, col_blue4 },
+static const char *fonts[]    = { "JetBrains Mono Light:size=12", "FontAwesome:size=12" };
+static const char *colors[][3]= {   /* fg bg border */
+	[SchemeNorm] = { col_blue1, col_blue7, col_blue4 },
+    [SchemeSel]  = { col_blue1, col_blue5, col_blue3 },
 };
-static const unsigned int alphas[][3] = {        /* fg bg border */
-	[SchemeTagsSel]  = { 0xff, 0xbb, 0xff },     // Tagbar left selected {text,background,not used but cannot be empty}
-    [SchemeTagsNorm] = { 0xff, 0xbb, 0xff },     // Tagbar left unselected {text,background,not used but cannot be empty}
-    [SchemeInfoSel]  = { 0xff, 0xbb, 0xff },     // infobar middle  selected {text,background,not used but cannot be empty}
-    [SchemeInfoNorm] = { 0xff, 0xbb, 0xff },     // infobar middle  unselected {text,background,not used but cannot be empty}
-	[SchemeStatus]   = { 0xff, 0xbb, 0xff },     // Statusbar right {text,background,not used but cannot be empty}
+static const unsigned int alphas[][3] = { /* fg bg border */
+	[SchemeNorm] = { 0xff, 0xbb, 0xff },
+    [SchemeSel]  = { 0xff, 0xbb, 0xff },
 };
 
 /* dmenu */
@@ -88,17 +59,17 @@ static Key keys[] = {
 	/* modifier          key        function        argument */
 	{ MODKEY,            XK_space,  spawn,          {.v = dmenucmd} },
 	{ MODKEY|ControlMask,XK_space,  spawn,          SHCMD("ls -p $HOME/.local/scripts | rg -v / | dmenu") },
-	{ MODKEY,            XK_Return, spawn,          SHCMD(TERMINAL)},
-	{ MODKEY|ShiftMask,  XK_Return, spawn,          SHCMD(FILES)},
-	{ MODKEY|ControlMask,XK_Return, spawn,          SHCMD(WEB)},
+	{ MODKEY,            XK_Return, spawn,          SHCMD("alacritty")},
+	{ MODKEY|ShiftMask,  XK_Return, spawn,          SHCMD("thunar")},
+	{ MODKEY|ControlMask,XK_Return, spawn,          SHCMD("firefox")},
 	{ MODKEY,            XK_period, spawn,          SHCMD("arcolinux-tweak-tool")},
-	{ MODKEY,            XK_comma,  spawn,          SHCMD(TERMINAL " -e nvim ~/src/dwm/config.h") },
+	{ MODKEY,            XK_comma,  spawn,          SHCMD("alacritty -e nvim ~/src/dwm/config.h") },
 	{ MODKEY,            XK_v,      spawn,          SHCMD("pavctrl")},
 	{ MODKEY,            XK_Escape, spawn,          SHCMD("xfce4-taskmanager")},
-	{ MODKEY,            XK_x,      spawn,          SHCMD(EXIT)},
-	{ MODKEY,            XK_e,      spawn,          SHCMD(EDITOR)},
-	{ ControlMask,       XK_Left,   spawn,          SHCMD(WALLPAPER " -p")},
-	{ ControlMask,       XK_Right,  spawn,          SHCMD(WALLPAPER " -n")},
+	{ MODKEY,            XK_x,      spawn,          SHCMD("arcolinux-logout")},
+	{ MODKEY,            XK_e,      spawn,          SHCMD("emacs")},
+	{ ControlMask,       XK_Left,   spawn,          SHCMD("variety -p")},
+	{ ControlMask,       XK_Right,  spawn,          SHCMD("variety -n")},
 	{ ShiftMask,         XK_Left,   setgaps,        {.i = -1 } },
 	{ ShiftMask,         XK_Right,  setgaps,        {.i = +1 } },
 	{ MODKEY,            XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -114,16 +85,16 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,XK_j,      focusstack,     {.i = -1 } },
 	{ MODKEY|ControlMask,XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY|ControlMask,XK_l,      incnmaster,     {.i = +1 } },
-	{ MODKEY,            XK_F1,     spawn,          SHCMD(VOL_MUTE) },
-	{ MODKEY,            XK_F2,     spawn,          SHCMD(VOL_DOWN) },
-	{ MODKEY,            XK_F3,     spawn,          SHCMD(VOL_UP) },
-    { MODKEY,            XK_F4,     spawn,          SHCMD(MIC_MUTE) },
-    { MODKEY,            XK_F7,     spawn,          SHCMD(AIRPLANE_TGL)},
-    { MODKEY,            XK_F9,     spawn,          SHCMD(LOCK_SCRN)},
-	{ MODKEY,            XK_F10,    spawn,          SHCMD(SELECT_MONITOR) }, // RANDER to EXTERNAL LG 4K
-	{ MODKEY,            XK_F11,    spawn,          SHCMD(SCRN_BR_DOWN) },
-	{ MODKEY,            XK_F12,    spawn,          SHCMD(SCRN_BR_UP) },
-    { MODKEY,            XK_Print,  spawn,          SHCMD(PRINT_SCRN)},
+	{ MODKEY,            XK_F1,     spawn,          SHCMD("amixer -D pulse set Master 1+ toggle") },
+	{ MODKEY,            XK_F2,     spawn,          SHCMD("amixer set Master 10%-") },
+	{ MODKEY,            XK_F3,     spawn,          SHCMD("amixer set Master 10%+") },
+    //{ MODKEY,            XK_F4,     spawn,          SHCMD(MIC_MUTE) },
+    //{ MODKEY,            XK_F7,     spawn,          SHCMD(AIRPLANE_TGL)},
+    //{ MODKEY,            XK_F9,     spawn,          SHCMD(LOCK_SCRN)},
+	//{ MODKEY,            XK_F10,    spawn,          SHCMD(SELECT_MONITOR) }, // RANDER to EXTERNAL LG 4K
+	{ MODKEY,            XK_F11,    spawn,          SHCMD("xbacklight -dec 15") },
+	{ MODKEY,            XK_F12,    spawn,          SHCMD("xbacklight -inc 15") },
+    //{ MODKEY,            XK_Print,  spawn,          SHCMD(PRINT_SCRN)},
     //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_PLAY)},
     //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_STOP)},
     //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_FRWD)},
