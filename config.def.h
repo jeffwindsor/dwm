@@ -57,19 +57,6 @@ static const Layout layouts[]            = {      /* symbom arrange function */
 /* commands */
 static Key keys[] = {
 	/* modifier          key        function        argument */
-	{ MODKEY,            XK_space,  spawn,          {.v = dmenucmd} },
-	{ MODKEY|ControlMask,XK_space,  spawn,          SHCMD("ls -p $HOME/.local/scripts | rg -v / | dmenu") },
-	{ MODKEY,            XK_Return, spawn,          SHCMD("alacritty")},
-	{ MODKEY|ShiftMask,  XK_Return, spawn,          SHCMD("thunar")},
-	{ MODKEY|ControlMask,XK_Return, spawn,          SHCMD("firefox")},
-	{ MODKEY,            XK_period, spawn,          SHCMD("arcolinux-tweak-tool")},
-	{ MODKEY,            XK_comma,  spawn,          SHCMD("alacritty -e nvim ~/src/dwm/config.h") },
-	{ MODKEY,            XK_v,      spawn,          SHCMD("pavctrl")},
-	{ MODKEY,            XK_Escape, spawn,          SHCMD("xfce4-taskmanager")},
-	{ MODKEY,            XK_x,      spawn,          SHCMD("arcolinux-logout")},
-	{ MODKEY,            XK_e,      spawn,          SHCMD("emacs")},
-	{ ControlMask,       XK_Left,   spawn,          SHCMD("variety -p")},
-	{ ControlMask,       XK_Right,  spawn,          SHCMD("variety -n")},
 	{ ShiftMask,         XK_Left,   setgaps,        {.i = -1 } },
 	{ ShiftMask,         XK_Right,  setgaps,        {.i = +1 } },
 	{ MODKEY,            XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -85,25 +72,6 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,XK_j,      focusstack,     {.i = -1 } },
 	{ MODKEY|ControlMask,XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY|ControlMask,XK_l,      incnmaster,     {.i = +1 } },
-	{ MODKEY,            XK_F1,     spawn,          SHCMD("amixer -D pulse set Master 1+ toggle") },
-	{ MODKEY,            XK_F2,     spawn,          SHCMD("amixer set Master 10%-") },
-	{ MODKEY,            XK_F3,     spawn,          SHCMD("amixer set Master 10%+") },
-    //{ MODKEY,            XK_F4,     spawn,          SHCMD(MIC_MUTE) },
-    //{ MODKEY,            XK_F7,     spawn,          SHCMD(AIRPLANE_TGL)},
-    //{ MODKEY,            XK_F9,     spawn,          SHCMD(LOCK_SCRN)},
-	//{ MODKEY,            XK_F10,    spawn,          SHCMD(SELECT_MONITOR) }, // RANDER to EXTERNAL LG 4K
-	{ MODKEY,            XK_F11,    spawn,          SHCMD("xbacklight -dec 15") },
-	{ MODKEY,            XK_F12,    spawn,          SHCMD("xbacklight -inc 15") },
-    //{ MODKEY,            XK_Print,  spawn,          SHCMD(PRINT_SCRN)},
-    //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_PLAY)},
-    //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_STOP)},
-    //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_FRWD)},
-    //{ MODKEY,            XK_F,     spawn,          SHCMD(MEDIA_BACK)},
-	//{ 0, XF86XK_MonBrightnessUp,    spawn,          SHCMD(SCRN_BR_UP) },
-	//{ 0, XF86XK_MonBrightnessDown,  spawn,          SHCMD(SCRN_BR_DOWN) },
-	//{ 0, XF86XK_AudioRaiseVolume,   spawn,          SHCMD(VOL_UP) },
-	//{ 0, XF86XK_AudioLowerVolume,   spawn,          SHCMD(VOL_DOWN) },
-	//{ 0, XF86XK_AudioMute,          spawn,          SHCMD(VOL_MUTE) },
 	TAGKEYS(             XK_1,                      0)
 	TAGKEYS(             XK_2,                      1)
 	TAGKEYS(             XK_3,                      2)
