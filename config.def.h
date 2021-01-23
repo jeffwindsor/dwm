@@ -116,6 +116,7 @@ static const Rule rules[] = {
 };
 
 static const char *const autostart[] = {
+    "sxhkd", NULL,
     "nm-applet", NULL,
     "pamac-tray", NULL,
     "volumeicon", NULL,
