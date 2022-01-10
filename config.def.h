@@ -16,11 +16,6 @@ static const char *colors[][3]      = {
 	[SchemeNorm] = { col_blue1, col_blue7, col_blue4 },
     [SchemeSel]  = { col_blue1, col_blue5, col_blue3 },
 };
-static const unsigned int alphas[][3]      = {
-	/*               fg      bg        border     */
-	[SchemeNorm] = { OPAQUE, 0xbb, OPAQUE },
-	[SchemeSel]  = { OPAQUE, 0xbb, OPAQUE },
-};
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
